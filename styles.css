@@ -1,0 +1,222 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+    background-color: #e0f7fa; /* Light Cyan for default background */
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #e0f7fa; /* Light Cyan for default header */
+    padding: 10px;
+    display: flex;
+    justify-content: left; /* Align items to the left */
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    height: 300px;
+    overflow: hidden; /* Ensure the animation is not cut off */
+}
+
+.header-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.scroll-container {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: calc(100vh - 300px);
+    margin-top: 300px;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+}
+
+.section {
+    min-width: 100vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    scroll-snap-align: start;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    position: relative;
+}
+
+.up-arrow, .down-arrow {
+    font-size: 3rem; /* Make arrows bigger */
+    cursor: pointer;
+    margin-top: 20px;
+    transition: transform 0.3s;
+}
+
+.up-arrow {
+    position: absolute;
+    bottom: 20px; /* Move up arrow closer to the bottom */
+}
+
+.up-arrow:hover, .down-arrow:hover {
+    transform: scale(1.2);
+}
+
+#about-me {
+    background-color: #e0f7fa; /* Light Cyan */
+}
+
+#skills {
+    background-color: #fff9c4; /* Light Yellow */
+}
+
+#projects {
+    background-color: #ffe0b2; /* Light Orange */
+}
+
+#experience {
+    background-color: #c8e6c9; /* Light Green */
+}
+
+#education {
+    background-color: #b3e5fc; /* Light Blue */
+}
+
+#contact {
+    background-color: #d1c4e9; /* Light Purple */
+}
+
+.animation-container {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin-right: 20px;
+    position: relative;
+    z-index: 2;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3); /* Shadow for 3D effect */
+}
+
+.animation-container canvas {
+    transition: transform 0.3s ease;
+    z-index: 3;
+}
+
+.animation-container canvas:hover {
+    transform: scale(1.1);
+}
+
+@keyframes headerTransition {
+    from {
+        height: 0;
+        background-color: transparent;
+    }
+    to {
+        height: 100%;
+        background-color: var(--header-color);
+    }
+}
+
+.header-transition {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    animation: headerTransition 0.5s forwards;
+    z-index: 1;
+}
+
+.sub-page {
+    display: none;
+    position: fixed;
+    top: 100vh;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffffff;
+    z-index: 1001;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: top 0.5s;
+}
+
+.sub-page .down-arrow {
+    font-size: 3rem; /* Make arrows bigger */
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.skill {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.skill-name {
+    font-size: 1.5rem;
+    margin-right: 20px;
+    color: #333;
+}
+
+.dots {
+    display: flex;
+}
+
+.dot {
+    width: 20px;
+    height: 20px;
+    background-color: #333;
+    border-radius: 50%;
+    margin: 0 5px;
+    opacity: 0;
+    transform: scale(0);
+}
+
+.dot.half {
+    width: 10px; /* Half the width of a full dot */
+    border-radius: 10px 0 0 10px; /* Create a half circle */
+}
+
+.dot.revealed {
+    opacity: 1;
+    transform: scale(1);
+    transition: transform 0.5s, opacity 0.5s;
+}
+
+.dot.revealed:nth-child(1) {
+    transition-delay: 0.1s;
+}
+.dot.revealed:nth-child(2) {
+    transition-delay: 0.2s;
+}
+.dot.revealed:nth-child(3) {
+    transition-delay: 0.3s;
+}
+.dot.revealed:nth-child(4) {
+    transition-delay: 0.4s;
+}
+.dot.revealed:nth-child(5) {
+    transition-delay: 0.5s;
+}
+
+

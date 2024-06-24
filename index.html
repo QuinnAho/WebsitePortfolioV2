@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quinn's Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="animation-container">
+                <canvas id="3d-canvas"></canvas>
+            </div>
+        </div>
+    </header>
+    <div class="scroll-container">
+        <section class="section" id="about-me">
+            About Me
+            <div class="up-arrow" onclick="showSubPage('about-me-sub')">&#x2191;</div>
+        </section>
+        <section class="section" id="skills">
+            Skills
+            <div class="up-arrow" onclick="showSubPage('skills-sub')">&#x2191;</div>
+        </section>
+        <section class="section" id="projects">
+            Projects
+            <div class="up-arrow" onclick="showSubPage('projects-sub')">&#x2191;</div>
+        </section>
+        <section class="section" id="experience">
+            Experience
+            <div class="up-arrow" onclick="showSubPage('experience-sub')">&#x2191;</div>
+        </section>
+        <section class="section" id="education">
+            Education
+            <div class="up-arrow" onclick="showSubPage('education-sub')">&#x2191;</div>
+        </section>
+        <section class="section" id="contact">
+            Contact
+            <div class="up-arrow" onclick="showSubPage('contact-sub')">&#x2191;</div>
+        </section>
+    </div>
+
+    <!-- Sub pages -->
+    <div class="sub-page" id="skills-sub">
+        <div class="down-arrow" onclick="hideSubPage('skills-sub')">&#x2193;</div>
+        <div class="sub-page-content">
+            <div class="skill">
+                <div class="skill-name">Unreal/C++/Blueprints</div>
+                <div class="dots" data-skill-level="5">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            <div class="skill">
+                <div class="skill-name">Unity/C#</div>
+                <div class="dots" data-skill-level="3.5">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot half"></div>
+                    <div class="dot"></div> <!-- Add an extra dot for proper positioning -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sub-page" id="projects-sub">
+        <div class="down-arrow" onclick="hideSubPage('projects-sub')">&#x2193;</div>
+        <div class="sub-page-content">Projects Sub Page</div>
+    </div>
+    <div class="sub-page" id="experience-sub">
+        <div class="down-arrow" onclick="hideSubPage('experience-sub')">&#x2193;</div>
+        <div class="sub-page-content">Experience Sub Page</div>
+    </div>
+    <div class="sub-page" id="education-sub">
+        <div class="down-arrow" onclick="hideSubPage('education-sub')">&#x2193;</div>
+        <div class="sub-page-content">Education Sub Page</div>
+    </div>
+    <div class="sub-page" id="contact-sub">
+        <div class="down-arrow" onclick="hideSubPage('contact-sub')">&#x2193;</div>
+        <div class="sub-page-content">Contact Sub Page</div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
