@@ -125,13 +125,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         headerTransition.remove();
                         header.style.backgroundColor = getComputedStyle(document.getElementById(sections[closestSectionIndex].id)).backgroundColor;
                     }, 500); // Match the duration of the animation
-                }
-            });
 
-            // Remove the scaling class after snapping
-            sections.forEach(section => {
-                const element = document.getElementById(section.id);
-                element.classList.remove('scaling');
+                    // Remove the scaling class after snapping
+                    sections.forEach(section => {
+                        const element = document.getElementById(section.id);
+                        element.classList.remove('scaling');
+                    });
+                }
             });
         }
     });
@@ -141,10 +141,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const sectionIndex = Math.round(scrollContainer.scrollLeft / sectionWidth);
         const targetRotation = rotations[sectionIndex % rotations.length];
 
+        // Calculate minimal rotation path
+        const deltaY = targetRotation.y - cube.rotation.y;
+        const shortestPathY = Math.atan2(Math.sin(deltaY), Math.cos(deltaY));
+
         gsap.to(cube.rotation, {
             duration: 1,
             x: targetRotation.x,
-            y: targetRotation.y,
+            y: cube.rotation.y + shortestPathY,
             ease: "power3.inOut"
         });
 
@@ -183,10 +187,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const sectionIndex = Math.round((scrollContainer.scrollLeft + delta) / sectionWidth);
         const targetRotation = rotations[sectionIndex % rotations.length];
 
+        // Calculate minimal rotation path
+        const deltaY = targetRotation.y - cube.rotation.y;
+        const shortestPathY = Math.atan2(Math.sin(deltaY), Math.cos(deltaY));
+
         gsap.to(cube.rotation, {
             duration: 1,
             x: targetRotation.x,
-            y: targetRotation.y,
+            y: cube.rotation.y + shortestPathY,
             ease: "power3.inOut"
         });
 
@@ -213,51 +221,70 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Show sub page
-    window.showSubPage = function(subPageId) {
-        const subPage = document.getElementById(subPageId);
-        subPage.style.display = 'flex';
-        subPage.style.top = '100vh';
-        setTimeout(() => {
-            subPage.style.top = '0';
-        }, 10);
-    
-        // Animate dots on the skills sub-page
+   // Show sub page
+window.showSubPage = function(subPageId) {
+    const subPage = document.getElementById(subPageId);
+    subPage.style.display = 'flex';
+    subPage.style.top = '100vh';
+    setTimeout(() => {
+        subPage.style.top = '0';
+    }, 10);
+
+    // Animate dots on the skills sub-page
+    if (subPageId === 'skills-sub') {
+        const skills = document.querySelectorAll('.skill .dots');
+        skills.forEach(skill => {
+            const skillLevel = parseFloat(skill.getAttribute('data-skill-level')); // Parse skill level as float
+            const dots = skill.children;
+            for (let i = 0; i < Math.floor(skillLevel); i++) {
+                setTimeout(() => {
+                    dots[i].classList.add('revealed');
+                }, i * 100); // Delay each dot's reveal by 100ms
+            }
+            // If there's a half dot, reveal it
+            if (skillLevel % 1 !== 0) {
+                setTimeout(() => {
+                    dots[Math.floor(skillLevel)].classList.add('revealed');
+                }, Math.floor(skillLevel) * 100);
+            }
+
+            // Show the skill level text
+            setTimeout(() => {
+                const skillLevelText = document.createElement('span');
+                skillLevelText.classList.add('skill-level');
+                skillLevelText.textContent = `${skillLevel}/5`;
+                skill.appendChild(skillLevelText);
+
+                // Fade in the skill level text
+                setTimeout(() => {
+                    skillLevelText.style.opacity = '1';
+                }, 500); // Delay the fade-in to start after the dots are revealed
+            }, skillLevel * 100 + 500); // Delay the skill level text reveal
+        });
+    }
+}
+   
+   // Hide sub page
+window.hideSubPage = function(subPageId) {
+    const subPage = document.getElementById(subPageId);
+    subPage.style.top = '100vh';
+    setTimeout(() => {
+        subPage.style.display = 'none';
         if (subPageId === 'skills-sub') {
             const skills = document.querySelectorAll('.skill .dots');
             skills.forEach(skill => {
-                const skillLevel = parseFloat(skill.getAttribute('data-skill-level')); // Parse skill level as float
                 const dots = skill.children;
-                for (let i = 0; i < Math.floor(skillLevel); i++) {
-                    setTimeout(() => {
-                        dots[i].classList.add('revealed');
-                    }, i * 100); // Delay each dot's reveal by 100ms
+                for (let dot of dots) {
+                    dot.classList.remove('revealed');
                 }
-                // If there's a half dot, reveal it
-                if (skillLevel % 1 !== 0) {
-                    setTimeout(() => {
-                        dots[Math.floor(skillLevel)].classList.add('revealed');
-                    }, Math.floor(skillLevel) * 100);
+                // Remove the skill level text
+                const skillLevelText = skill.querySelector('.skill-level');
+                if (skillLevelText) {
+                    skillLevelText.remove();
                 }
             });
         }
-    }
-    
-    // Hide sub page
-    window.hideSubPage = function(subPageId) {
-        const subPage = document.getElementById(subPageId);
-        subPage.style.top = '100vh';
-        setTimeout(() => {
-            subPage.style.display = 'none';
-            if (subPageId === 'skills-sub') {
-                const skills = document.querySelectorAll('.skill .dots');
-                skills.forEach(skill => {
-                    const dots = skill.children;
-                    for (let dot of dots) {
-                        dot.classList.remove('revealed');
-                    }
-                });
-            }
-        }, 500);
-    }
+    }, 500);
+}
+
 });

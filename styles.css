@@ -219,4 +219,48 @@ header {
     transition-delay: 0.5s;
 }
 
+.skill-level {
+    display: block; /* Make it a block element to center it */
+    margin: -10px auto; /* Center the text */
+    margin-top: -2px; /* Add some space above the text */
+    font-size: 1.5rem;
+    color: #333;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.skills-container {
+    display: flex;
+    justify-content: space-between;
+    width: 95%; /* Adjust width as needed */
+    margin: 100px auto; /* Center the container */
+}
+
+.column {
+    flex: 1;
+    margin: 30px;
+}
+
+.middle-column {
+    flex: 2; /* Make the middle column slightly bigger */
+    text-align: center; /* Center the text */
+}
+
+.column h3 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.middle-column h2 {
+    font-size: 2rem;
+    color: #333;
+}
+
+.divider {
+    width: 70%;
+    height: 2px;
+    background-color: #333;
+    margin: 30px auto; /* Center the divider */
+}
 
