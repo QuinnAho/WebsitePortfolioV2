@@ -162,9 +162,17 @@ header {
 .sub-page .down-arrow {
     font-size: 3rem; /* Make arrows bigger */
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: -10px;
+    left: 50%; /* Position to the center horizontally */
+    transform: translateX(-50%); /* Center align */
+    cursor: pointer;
+    transition: transform 0.3s;
 }
+
+.sub-page .down-arrow:hover {
+    transform: translateX(-50%) scale(1.2); /* Scale on hover while maintaining center alignment */
+}
+
 
 .skill {
     display: flex;
@@ -262,5 +270,27 @@ header {
     height: 2px;
     background-color: #333;
     margin: 30px auto; /* Center the divider */
+}
+
+.projects-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px; /* Space between boxes */
+    width: 95%; /* Adjust width as needed */
+    margin: 40px auto; /* Center the container */
+}
+
+.project-box {
+    width: 100%; /* Full width within the grid */
+    height: 300px; /* Adjust height to make them more box-shaped */
+    background-color: #f0f0f0; /* Slightly darker color for better visibility */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 3D shadow effect */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for transform and shadow */
+}
+
+.project-box:hover {
+    transform: translateY(-10px); /* Slightly extend out of the screen */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhance shadow effect */
 }
 
